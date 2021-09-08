@@ -1,4 +1,4 @@
-// Video Explanation : bit.ly/Twingworld
+// Video Explanation : http://bit.ly/Twingworld
 import java.util.*;
 public class NextGreaterElement
 {
