@@ -1,0 +1,77 @@
+/******************************************************************************
+
+      For video explanation : http://bit.ly/Twingworld
+
+*******************************************************************************/
+import java.util.*;
+public class MergeTwoSortedArrays
+{
+	public static void main(String[] args) {
+		int arr1[]={1,3,5,7};
+		int arr2[]={0,2,6,8,9};
+		new MergeTwoSortedArrays().optimal2(arr1,arr2,arr1.length,arr2.length);
+		for(int i=0;i<arr1.length;i++)
+		    System.out.print(arr1[i]+" ");
+	    System.out.println();
+	    for(int i=0;i<arr2.length;i++)
+	        System.out.print(arr2[i]+" ");
+	}
+	public void bruteForce(int arr1[],int arr2[],int m,int n){
+	    int temp[]=new int[m+n];
+	    int tempsize=0;
+	 
+	    
+	    for(int i=0;i<m;i++)
+	        temp[tempsize++]=arr1[i];
+        for(int i=0;i<n;i++)
+            temp[tempsize++]=arr2[i];
+            
+        Arrays.sort(temp);
+        
+        for(int i=0;i<m;i++)
+            arr1[i]=temp[i];
+        for(int i=0;i<n;i++)
+            arr2[i]=temp[m+i];
+	}
+	
+	public void optimal1(int arr1[],int arr2[],int m ,int n){
+	    int temp[]=new int[m+n];
+	    int tempsize=0;
+	    int i=0,j=0;
+	    while(i<m && j<n){
+	        if(arr1[i]<=arr2[j])
+	            temp[tempsize++]=arr1[i++];
+            else
+                temp[tempsize++]=arr2[j++];
+	    }
+	    while(i<m){
+	        temp[tempsize++]=arr1[i++];
+	    }
+	    while(j<n){
+	        temp[tempsize++]=arr2[j++];
+	    }
+	    
+        for(i=0;i<m;i++)
+            arr1[i]=temp[i];
+        for(i=0;i<n;i++)
+            arr2[i]=temp[m+i];
+	}
+	
+	public void optimal2(int arr1[],int arr2[],int m,int n){
+	    for(int i=0;i<m;i++){
+	        if(arr1[i]>arr2[0]){
+	            int temp=arr1[i];
+	            arr1[i]=arr2[0];
+	            arr2[0]=temp;
+	            
+	            int unsorted=arr2[0];
+	            int j;
+	            for(j=1;j<n && unsorted>arr2[j];j++){
+	                arr2[j-1]=arr2[j];
+	            }
+	            
+	            arr2[j-1]=unsorted;
+	        }
+	    }
+	}
+}
